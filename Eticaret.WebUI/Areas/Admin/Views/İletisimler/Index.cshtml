@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Eticaret.Core.Entities.Iletisim>
+
+@{
+    ViewData["Title"] = "İletişim Formları";
+}
+
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.İsim)</th>
+            <th>@Html.DisplayNameFor(model => model.Soyisim)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Telefon)</th>
+            <th>@Html.DisplayNameFor(model => model.OlusturmaTarihi)</th>
+            <th>Durum</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.Okundu ? "" : "table-warning")">
+                <td>@item.İsim</td>
+                <td>@item.Soyisim</td>
+                <td>@item.Email</td>
+                <td>@item.Telefon</td>
+                <td>@item.OlusturmaTarihi.ToShortDateString()</td>
+                <td>
+                    @if (item.Okundu)
+                    {
+                        <span class="badge bg-success">Okundu</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Okunmadı</span>
+                    }
+                </td>
+                <td>
+                    <!-- "Okundu Olarak İşaretle" Butonu -->
+                    @if (!item.Okundu)
+                    {
+                        <a href="@Url.Action("Details", "İletisimler", new { id = item.Id })" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-check-circle"></i> Okundu Olarak İşaretle|
+                        </a>
+ 
+                    }
+
+                    <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="fa-solid fa-user-pen fa-fade" style="color: #ffc800;"></i>
+                    </a> |
+                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fa-solid fa-circle-info fa-fade fa-lg" style="color: #ff0000;"></i>
+                    </a> |
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                        <i class="fa-solid fa-ban fa-fade fa-lg" style="color: #000000;"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

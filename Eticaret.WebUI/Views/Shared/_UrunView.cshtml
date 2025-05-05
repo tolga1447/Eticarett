@@ -1,0 +1,35 @@
+﻿@model Urun
+
+<div class="col mb-5">
+    <div class="product-card position-relative">
+        @*  Favoriler Butonu *@ 
+        <form asp-action="Add" asp-controller="Favoriler" class="position-absolute top-0 start-0 m-2" style="z-index: 10; pointer-events: auto;">
+            <input type="hidden" name="UrunId" value="@Model.Id" />
+            <button class="btn btn-transparent p-0" type="submit" style="box-shadow: none; border: none; background: none;">
+                <i class="bi bi-heart fs-4 text-danger"></i>
+            </button>
+        </form>
+
+        @* İndirim Rozeti *@ 
+        @if (Model.UrunFiyat < (Model.UrunFiyat + 10))
+        {
+            <span class="discount-badge position-absolute top-0 end-0 m-2">İndirim</span>
+        }
+
+        @* <!-- Ürün Resmi --> *@
+        <a href="/Urunler/Details/@Model.Id">
+            <img class="product-img" src="/Img/Urunler/@Model.Resim" alt="@Model.Urunİsim">
+        </a>
+
+        @*  Ürün Bilgileri  *@
+        <div class="product-details text-center">
+            <form action="/Sepet/Add" method="post">
+            <h3 class="product-title">@Model.Urunİsim</h3>
+            <input type="hidden" name="UrunId" value="@Model.Id" />
+            <p class="product-old-price text-muted text-decoration-line-through">@(Model.UrunFiyat + 10)₺</p>
+            <p class="product-price text-danger fw-bold">@Model.UrunFiyat.ToString("C")</p>
+            <button class="btn btn-success " type="submit">Sepete Ekle</button>
+            </form>
+        </div>
+    </div>
+</div>

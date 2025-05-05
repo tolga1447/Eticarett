@@ -1,0 +1,126 @@
+﻿@model SepetViewModel
+
+@{
+	ViewData["Title"] = "Sepetim";
+}
+
+<section class="container my-5">
+	<div class="text-center">
+		<h1 class="display-4">Sepetim</h1>
+	</div>
+	<div class="row">
+		@if (Model.sepetLines.Any())
+		{
+			<div class="col-md-8">
+				<div class="table-responsive">
+
+					<table class="table table-hover">
+						<tr>
+							<th></th>
+							<th>Ürün</th>
+							<th>Fiyat</th>
+							<th>Miktar</th>
+							<th>Toplam</th>
+							<th></th>
+						</tr>
+						<tbody>
+
+							@foreach (var item in Model.sepetLines)
+							{
+								<tr>
+									<td>
+										<img src="/Img/Urunler/@item.urun.Resim" alt="" height="40" />
+									</td>
+									<td>
+										<a class="nav-link text-dark" href="/Urunler/Details/@item.urun.Id">
+											@item.urun.Urunİsim
+										</a>
+									</td>
+									<td>
+										@item.urun.UrunFiyat.ToString("c")
+									</td>
+									<td>
+										@item.Quantity
+									</td>
+									<td>
+										@((item.Quantity * item.urun.UrunFiyat).ToString("c"))
+									</td>
+									<td>
+										<form asp-action="Remove" asp-controller="Sepet">
+											<input type="hidden" name="UrunId" value="@item.urun.Id" />
+											<button class="btn btn-sm btn-danger" type="submit">
+												<i class="bi bi-x-lg"></i>
+											</button>
+										</form>
+									</td>
+									<td>
+										<form asp-action="Update" asp-controller="Sepet" method="post" class="d-flex align-items-center">
+											<input type="hidden" name="UrunId" value="@item.urun.Id" />
+											<input type="number" name="Quantity" value="@item.Quantity" min="1" class="form-control form-control-sm text-center" style="width: 60px;" />
+											<button type="submit" class="btn btn-sm btn-primary ms-2">Güncelle</button>
+										</form>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card shadow-sm rounded-4 p-4">
+					<h4 class="mb-4 text-center">Sipariş Özeti</h4>
+					<table class="table table-borderless mb-0">
+						<tbody>
+							<tr>
+								<td><strong>Ara Toplam:</strong></td>
+								<td class="text-end">@Model.ToplamFiyat.ToString("c")</td>
+							</tr>
+							<tr>
+								<td><strong>Kargo:</strong></td>
+								<td class="text-end">
+									@(Model.ToplamFiyat > 999
+																? "Ücretsiz"
+																: Model.sepetLines.Any()
+																? "99₺"
+																: "0₺")
+								</td>
+							</tr>
+							<tr class="border-top pt-3">
+								<td><strong>Genel Toplam:</strong></td>
+								<td class="text-end text-primary fw-bold">
+									@(
+																Model.ToplamFiyat > 999
+																? Model.ToplamFiyat.ToString("c")
+																: Model.sepetLines.Any()
+																? (Model.ToplamFiyat + 99).ToString("c")
+																: Model.ToplamFiyat.ToString("c")
+																)
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="text-center">
+						<a href="/" class="btn btn-danger">
+							<i class="bi bi-cart me-1"></i> Alışverişe Devam Et
+						</a>
+						<a href="/Sepet/Checkout" class="btn btn-success mt-2">
+							<i class="bi bi-credit-card me-1"></i> Satın Al
+						</a>
+					</div>
+				</div>
+			</div>
+
+		}
+		else
+		{
+			<div class="container">
+				<div class="alert alert-warning my-5">
+					<h3>Sepetinizde Ürün Bulunmamaktadır!</h3>
+				</div>
+			</div>
+		}
+	</div>
+</section>
+

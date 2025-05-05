@@ -1,0 +1,48 @@
+﻿@model Marka
+
+@{
+    ViewData["Title"] = "Marka Bilgileri";
+}
+
+
+
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Markaİsim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Markaİsim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Aciklama)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Logo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Logo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Aktif)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Aktif)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiralamaNo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiralamaNo)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id"> Düzenleye Dön</a> |
+    <a asp-action="Index">Listeye Dön</a>
+</div>

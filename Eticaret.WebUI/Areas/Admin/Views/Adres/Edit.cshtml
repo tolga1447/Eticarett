@@ -1,0 +1,64 @@
+﻿@model Eticaret.Core.Entities.Adres
+
+@{
+    ViewData["Title"] = "Adres Düzenle";
+}
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sehir" class="control-label"></label>
+                <input asp-for="Sehir" class="form-control" />
+                <span asp-validation-for="Sehir" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="İlce" class="control-label"></label>
+                <input asp-for="İlce" class="form-control" />
+                <span asp-validation-for="İlce" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AcikAdres" class="control-label"></label>
+                <textarea asp-for="AcikAdres" class="form-control"> </textarea>
+                <span asp-validation-for="AcikAdres" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsAktif" /> @Html.DisplayNameFor(model => model.IsAktif)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsFaturaAdresi" /> @Html.DisplayNameFor(model => model.IsFaturaAdresi)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsTeslimatAdresi" /> @Html.DisplayNameFor(model => model.IsTeslimatAdresi)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppUserId" class="control-label"></label>
+                <select asp-for="AppUserId" class="form-select" asp-items="ViewBag.AppUserId"></select>
+                <span asp-validation-for="AppUserId" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye Dön</a>
+</div>
+

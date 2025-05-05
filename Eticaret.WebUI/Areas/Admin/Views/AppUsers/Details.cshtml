@@ -1,0 +1,77 @@
+﻿@model AppUser
+
+@{
+    ViewData["Title"] = "Kullanıcı Bilgileri";
+}
+
+
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.İsim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.İsim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Soyisim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Soyisim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefon)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Telefon)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sifre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sifre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KullaniciAdi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KullaniciAdi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Aktif)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Aktif)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsAdmin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsAdmin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OlusturmaTarihi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OlusturmaTarihi)
+        </dd>
+       @*  <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KullaniciGuid)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KullaniciGuid)
+        </dd> *@
+    </dl>
+</div>
+<div>
+    <a class ="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id"> Düzenleye Dön</a> |
+    <a asp-action="Index">Listeye Dön</a>
+</div>

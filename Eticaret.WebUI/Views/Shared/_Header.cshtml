@@ -1,0 +1,103 @@
+﻿@* // BU SAYFA _HEADER, LAYOUTDA' Kİ HEADER KODLARINI BARINDIRIYOR LAYOUTTA KOD KALABALIĞI OLMAMAMASI İÇİN *@
+@using Eticaret.WebUI.ExtensionMethods
+<header>
+	<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+		<div class="container-fluid">
+			<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Eticaret.WebUI</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+				<ul class="navbar-nav flex-grow-1 m-auto">
+					<li class="nav-item">
+						<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">ANASAYFA</a>
+					</li>
+					@await Component.InvokeAsync("Kategoriler")
+					<li class="nav-item d-flex ms-5">
+						<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">İLETİŞİM</a>
+					</li>
+					<div class="d-flex ms-auto">
+						<form action="/Urunler" class="me-2" role="search">
+							<input name="q" type="search" class="form-control" placeholder="Ürün Ara..." aria-label="Search">
+						</form>
+						@if (Context.User.Identity.IsAuthenticated)//kullanıcı oturum açmışmı açmışsa
+						{
+							<div class="dropdown">
+								<a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+								   data-bs-toggle="dropdown" aria-expanded="false">
+									Hesabım
+								</a>
+
+								<ul class="dropdown-menu dropdown-menu-right" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-62px, 46px, 0px);" x-placement="bottom-end">
+									<li><a href="/Sepet" class="dropdown-item">🛒Siparişlerim</a></li>
+									<li><a href="/Favoriler" class="dropdown-item">⭐Favorilerim</a></li>
+									<li><a href="/Account/" class="dropdown-item">⚙️Hesap Bilgilerim</a></li>
+									<li><a href="/Account/" class="dropdown-item">📆Adres Bilgilerim</a></li>
+									<li><a href="/Home/ContactUs" class="dropdown-item">📞İletişim</a></li>
+
+
+									@if (User.IsInRole("Admin"))
+									{
+										<li><hr class="dropdown-divider"></li>
+										<li>
+											<a href="/Admin/Main/Index" class="dropdown-item text-primary fw-bold">
+												🛠 Admin Paneline Git
+											</a>
+										</li>
+									}
+
+									<li><hr class="dropdown-divider"></li>
+									<li>
+										<a href="/Account/SignOut" class="dropdown-item d-flex align-items-center justify-content-between text-danger">
+											<span>Çıkış Yap</span>
+											<svg class="svg-inline--fa fa-sign-out-alt fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path></svg><!-- <i class="fas fa-sign-out-alt"></i> Font Awesome fontawesome.com -->
+										</a>
+									</li>
+								</ul>
+							</div>
+						}
+						else
+						{
+							<div class="text-end">
+								<a href="/Account/SignIn" class="btn btn-outline-primary me-2">Giriş</a>
+								<a href="/Account/SignUp" class="btn btn-warning">Kayıt Ol</a>
+							</div>
+						}
+						<div class="dropdown">
+							@{
+								var sepet = Context.Session.GetJson<Eticaret.Services.Concrete.SepetService>("Sepet");
+								if (sepet != null && sepet.SepetLines.Count > 0)
+								{
+									<a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										Sepetim
+									</a>
+
+									<ul class="dropdown-menu">
+										@foreach (var item in sepet.SepetLines)
+										{
+											<li>
+												<a class="dropdown-item " href="/Urunler/Details/@item.urun.Id">
+													<img src="/Img/Urunler/@item.urun.Resim" alt="" height="50" />
+													@item.urun.Urunİsim
+												</a>
+											</li>
+										}
+										<li class="text-center"><a class="btn btn-danger" href="/Sepet"> Sepete Git</a></li>
+									</ul>
+								}
+								else
+								{
+									<a class="nav-link text-dark" href="/Sepet">
+										Sepetim
+									</a>
+								}
+
+							}
+						</div>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>

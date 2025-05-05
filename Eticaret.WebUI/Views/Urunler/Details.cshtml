@@ -1,0 +1,144 @@
+﻿@model UrunDetailViewModel
+@{
+    ViewData["Title"] = Model.Urun?.Urunİsim ?? "Ürün Detayı";
+}
+
+<!-- Product section -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-5 align-items-center">
+            <!-- Ürün Görseli -->
+            <div class="col-md-6">
+                <div class="product-image shadow-lg rounded-4 overflow-hidden">
+                    <img class="img-fluid" src="/Img/Urunler/@(Model.Urun?.Resim )" alt="@Model.Urun?.Urunİsim">
+                </div>
+            </div>
+
+            <!-- Ürün Bilgileri -->
+            <div class="col-md-6">
+                <div class="small text-muted mb-2">Ürün Kodu: @(Model.Urun?.UrunKodu)</div>
+                <h1 class="display-6 fw-bold text-dark">@Model.Urun?.Urunİsim</h1>
+                <div class="fs-3 mb-4 text-danger fw-semibold">
+                    <span>@(Model.Urun?.UrunFiyat.ToString("c"))</span>
+                </div>
+                <p class="text-muted lead">@(Model.Urun?.Aciklama ?? "Bu ürün için açıklama bulunmamaktadır.")</p>
+                <div class="d-flex align-items-center">
+                    <form asp-action="Add" asp-controller="Sepet"class="d-flex"> 
+                    <input type="hidden" name="UrunId" value="@Model.Urun.Id"/>
+                        <input class="form-control text-center me-3 border-secondary" name="Quantity" id="inputQuantity" type="number" value="1" min="1" style="max-width: 5rem;">
+                    <button class="btn btn-danger btn-lg px-4 rounded-3 shadow-sm" type="submit">
+                        <i class="bi-cart-fill me-2"></i> Sepete Ekle
+                    </button>
+                    </form>
+                    <form asp-action="Add" asp-controller="Favoriler" class="d-flex ms-3">
+                        <input type="hidden" name="UrunId" value="@Model.Urun.Id" />
+                        <button class="btn btn-danger btn-lg px-4 rounded-3 shadow-sm" type="submit">
+                            <i class="bi-heart me-2"></i> Favorilere Ekle
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related items section -->
+@if (Model.İliskiliUrunler != null && Model.İliskiliUrunler.Any())
+{
+    <section class="py-5 bg-light">
+        <div class="container px-4 px-lg-5">
+            <h2 class="fw-bold mb-4 text-center text-primary">İlişkili Ürünler</h2>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                @foreach (var item in Model.İliskiliUrunler)
+                {
+                    <div class="col mb-4">
+                        <partial name="_UrunView" model="item" />
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <section class="py-5 bg-light text-center">
+        <div class="container">
+            <p class="text-muted">Bu ürünle ilgili başka ürün bulunmamaktadır.</p>
+        </div>
+    </section>
+}
+
+<style>
+    /* Ürün görseli */
+    .product-image {
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    /* Ürün bilgileri */
+    .product-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .product-price {
+        font-size: 1.8rem;
+        color: #e63946;
+        font-weight: bold;
+    }
+
+    .product-description {
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+    /* Sepete ekle butonu */
+    .btn-cart {
+        background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        color: white;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 12px 20px;
+        border-radius: 8px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+        .btn-cart:hover {
+            background: linear-gradient(135deg, #ff4b2b, #ff416c);
+            transform: scale(1.05);
+        }
+
+    /* İlişkili Ürünler */
+    .related-products h2 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #1d3557;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .related-card {
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .related-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+</style>

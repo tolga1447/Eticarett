@@ -1,0 +1,87 @@
+﻿@model Eticaret.Core.Entities.Urun
+
+@{
+    ViewData["Title"] = "Ürün Sil";
+}
+
+
+
+<h4>Kayıt Silinecek! Onaylıyor musunuz??</h4>
+<div>
+    <h4>Urun</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Urunİsim)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Urunİsim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Aciklama)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Resim)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="/Img/Urunler/@Model.Resim" height="75"
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UrunFiyat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UrunFiyat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UrunKodu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UrunKodu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StokMiktari)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StokMiktari)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Aktif)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Aktif)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AnaSayfa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AnaSayfa)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kategori)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kategori.Kategoriİsim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Marka)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Marka.Markaİsim)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SiralamaNo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SiralamaNo)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Sil" class="btn btn-danger" /> |
+        <a asp-action="Index">Listeye Dön</a>
+    </form>
+</div>

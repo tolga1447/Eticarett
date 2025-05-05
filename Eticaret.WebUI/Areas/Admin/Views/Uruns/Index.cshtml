@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Eticaret.Core.Entities.Urun>
+
+@{
+    ViewData["Title"] = "Ürünler Listesi";
+}
+
+
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary rounded-pill">
+        <i class="fa-solid fa-plus fa-flip"></i>  Yeni Ekle
+    </a>
+</p>
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Urunİsim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aciklama)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UrunFiyat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UrunKodu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StokMiktari)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aktif)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnaSayfa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategori)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marka)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiralamaNo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Urunİsim)
+            </td>
+            <td>
+                @item.OlusturmaTarihi.ToShortDateString()
+            </td>
+            <td>
+                <img src="/Img/Urunler/@item.Resim" alt="" height="40"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrunFiyat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrunKodu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StokMiktari)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aktif)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnaSayfa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategori.Kategoriİsim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marka.Markaİsim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiralamaNo)
+            </td>
+            <td>
+                    <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.Id"> <i class="fa-solid fa-user-pen fa-fade" style="color: #ffc800;"></i> </a> |
+                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info fa-fade fa-lg" style="color: #ff0000;"></i> </a> |
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-ban fa-fade fa-lg" style="color: #000000;"></i> </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

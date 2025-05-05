@@ -1,0 +1,73 @@
+﻿@model KullaniciDuzenlemeView
+
+@{
+    ViewData["Title"] = "Hesap Bilgilerim";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-4 rounded-3">
+                <h3 class="text-center mb-4">Hesap Bilgilerim</h3>
+                <hr />
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="İsim" class="form-label"></label>
+                        <input asp-for="İsim" class="form-control rounded-3" />
+                        <span asp-validation-for="İsim" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Soyisim" class="form-label"></label>
+                        <input asp-for="Soyisim" class="form-control rounded-3" />
+                        <span asp-validation-for="Soyisim" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control rounded-3" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Telefon" class="form-label"></label>
+                        <input asp-for="Telefon" class="form-control rounded-3" />
+                        <span asp-validation-for="Telefon" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Sifre" class="form-label"></label>
+                        <div class="input-group">
+                            <input asp-for="Sifre" type="text" class="form-control rounded-start-3" id="passwordField" />
+                            <button type="button" class="btn btn-outline-secondary rounded-end-3" onclick="togglePassword()">👁</button>
+                        </div>
+                        <span asp-validation-for="Sifre" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary rounded-3">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Sayfa yüklendiğinde şifreyi otomatik olarak gizle
+    window.onload = function() {
+        document.getElementById("passwordField").type = "password";
+    };
+
+    // Şifre gösterme/gizleme fonksiyonu
+    function togglePassword() {
+        var passwordField = document.getElementById("passwordField");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+</script>

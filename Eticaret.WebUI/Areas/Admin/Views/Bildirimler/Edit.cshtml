@@ -1,0 +1,52 @@
+﻿@model Eticaret.Core.Entities.Bildirim
+
+@{
+    ViewData["Title"] = "Duyuru Düzenle";
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Resim" />
+            <input type="hidden" asp-for="OlusturmaTarihi" />
+            <div class="form-group">
+                <label asp-for="İsim" class="control-label"></label>
+                <input asp-for="İsim" class="form-control" />
+                <span asp-validation-for="İsim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aciklama" class="control-label"></label>
+                <textarea asp-for="Aciklama" class="form-control"> </textarea>
+                <span asp-validation-for="Aciklama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resim" class="control-label"></label>
+                <input asp-for="Resim" class="form-control" type="file" />
+                <span asp-validation-for="Resim" class="text-danger"></span>
+                @if (Model.Resim != null && !string.IsNullOrWhiteSpace(Model.Resim))
+                {
+                    <img src="/Img/Bildirimler/@Model.Resim" height="75" />
+                    <label class="form-check-label">
+                        @Html.CheckBox("cbResmiSil") Resmi Sil
+                    </label>
+                }
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Aktif" /> @Html.DisplayNameFor(model => model.Aktif)
+                </label>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye Dön</a>
+</div>
+

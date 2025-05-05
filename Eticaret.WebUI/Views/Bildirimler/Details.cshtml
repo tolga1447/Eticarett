@@ -1,0 +1,17 @@
+﻿@model Eticaret.Core.Entities.Bildirim
+
+@{
+    ViewData["Title"] = Model.İsim;
+}
+<h1>@Model.İsim</h1>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <img src="/Img/Bildirimler/@Model.Resim" alt="@Model.İsim" class="img-fluid"
+    </div>
+    <div class="col-md-8">
+        @Model.Aciklama
+    </div>
+
+</div>

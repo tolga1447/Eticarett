@@ -1,0 +1,77 @@
+﻿@model AppUser
+
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Kayıt Ol</h2>
+            <p class="text-muted">Hızlıca yeni bir hesap oluşturun.</p>
+        </div>
+
+        <form asp-action="SignUp">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <div class="mb-3">
+                <label asp-for="İsim" class="form-label fw-semibold">Adınız</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <input asp-for="İsim" class="form-control" placeholder="Adınızı girin" />
+                </div>
+                <span asp-validation-for="İsim" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Soyisim" class="form-label fw-semibold">Soyadınız</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
+                    <input asp-for="Soyisim" class="form-control" placeholder="Soyadınızı girin" />
+                </div>
+                <span asp-validation-for="Soyisim" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label fw-semibold">E-Posta</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    <input asp-for="Email" class="form-control" placeholder="E-posta adresinizi girin" />
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Telefon" class="form-label fw-semibold">Telefon</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                    <input asp-for="Telefon" class="form-control" placeholder="Telefon numaranızı girin" />
+                </div>
+                <span asp-validation-for="Telefon" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Sifre" class="form-label fw-semibold">Şifre</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input asp-for="Sifre" type="password" class="form-control" placeholder="Şifrenizi girin" />
+                </div>
+                <span asp-validation-for="Sifre" class="text-danger"></span>
+            </div>
+
+            <div class="d-grid mt-3">
+                <button type="submit" class="btn btn-primary fw-bold">Kayıt Ol</button>
+            </div>
+
+            <div class="text-center mt-3">
+                <p class="mb-0">Zaten hesabınız var mı? <a href="/Account/SignIn" class="text-primary">Giriş yapın</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

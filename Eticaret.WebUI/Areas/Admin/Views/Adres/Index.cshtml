@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Eticaret.Core.Entities.Adres>
+
+@{
+    ViewData["Title"] = "Adresler";
+}
+
+
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary rounded-pill">
+        <i class="fa-solid fa-plus fa-flip"></i>  Yeni Ekle
+    </a>
+</p>
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sehir)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.İlce)
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.AcikAdres)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.IsAktif)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsFaturaAdresi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsTeslimatAdresi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppUser)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sehir)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.İlce)
+            </td>
+           @*  <td>
+                @Html.DisplayFor(modelItem => item.AcikAdres)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAktif)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsFaturaAdresi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsTeslimatAdresi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppUser.Email)
+            </td>
+            <td>
+                    <a class="btn btn-sm btn-success" asp-action="Edit" asp-route-id="@item.Id"> <i class="fa-solid fa-user-pen fa-fade" style="color: #ffc800;"></i> </a> |
+                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info fa-fade fa-lg" style="color: #ff0000;"></i> </a> |
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa-solid fa-ban fa-fade fa-lg" style="color: #000000;"></i> </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
